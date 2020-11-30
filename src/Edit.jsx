@@ -28,7 +28,7 @@ class Edit extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         this.setState({response: null});
-        Axios.put('http://localhost:3000/api/url/' + this.state.shortenedUrl + '/edit',
+        Axios.put('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url/' + this.state.shortenedUrl + '/edit',
         {
             originalUrl: this.state.originalUrl
         })
@@ -46,7 +46,7 @@ class Edit extends React.Component {
 
     onDelete(event) {
         event.preventDefault();
-        Axios.delete('http://localhost:3000/api/url/' + this.state.shortenedUrl + '/edit')
+        Axios.delete('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url/' + this.state.shortenedUrl + '/edit')
             .then(response => {
                 if (response.status === 200) {
                     this.props.history.push('/');

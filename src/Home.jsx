@@ -9,7 +9,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const { path_id } = this.props.match.params;
-    Axios.get('http://localhost:3000/api/url/' + path_id)
+    Axios.get('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url/' + path_id)
       .then(response => {
         window.location.href = response.data;
       })

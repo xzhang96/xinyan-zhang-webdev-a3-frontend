@@ -34,7 +34,7 @@ export default class CreateForm extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         this.setState({response: null});
-        Axios.post('http://localhost:3000/api/url',
+        Axios.post('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url',
             {
                 originalUrl: this.state.originalUrl,
                 shortenedUrl: this.state.shortenedUrl,
@@ -78,7 +78,7 @@ export default class CreateForm extends React.Component {
             <br/>
             <Alert variant="info" style={this.state.response !== null ? {display: "block"} : {display: "none"}}>
                 <h3>Your shortened url: </h3>
-                <h5><strong>http://localhost:3000/api/url/{this.state.response}</strong></h5>
+                <h5><strong>https://xinyan-zhang-webdev-a3-backend.herokuapp.com/url/{this.state.response}</strong></h5>
             </Alert>
             </>
         )   
