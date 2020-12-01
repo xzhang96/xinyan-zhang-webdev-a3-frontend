@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Alert from 'react-bootstrap/Alert';
 import './index.css';
 import { withRouter } from 'react-router-dom';
+import ErrorPage from './ErrorPage';
 
 class Edit extends React.Component {
     constructor(props) {
@@ -16,7 +17,24 @@ class Edit extends React.Component {
             response: null,
             originalUrl: "",
             shortenedUrl: this.props.match.params.path_id,
+            errorMsg: null,
+            errorCode: null,
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            errorMsg: null,
+            errorCode: null,
+        })
+        const path_id = this.props.match.params.path_id;
+        Axios.get('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url/' + path_id + '/edit')
+            .then(response => {
+                if (response.status !== 200) {
+                    this.setState({errorMsg: response.data, errorCode: response.status});
+                }
+            })
+            .catch(error => this.setState({errorMsg: error.response.statusText, errorCode: error.response.status}));
     }
 
     onChange(key, event) {
@@ -56,6 +74,9 @@ class Edit extends React.Component {
     }
 
     render() {
+        if (this.state.errorCode !== null) {
+            return (<ErrorPage code={this.state.errorCode} msg={this.state.errorMsg}/>);
+        }
         return (
             <>
             <Container className="myContainer">

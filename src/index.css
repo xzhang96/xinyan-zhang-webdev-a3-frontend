@@ -4,3 +4,6 @@
   .create {
     padding: 30px;
   }
+  .error {
+    text-align: center;
+  }

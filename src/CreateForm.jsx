@@ -31,9 +31,23 @@ export default class CreateForm extends React.Component {
         }
     }
 
+    validateUrl(url) {
+        let pattern = new RegExp('^(https?:\\/\\/)'+
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+
+            '(\\#[-a-z\\d_]*)?$','i');
+        return !!pattern.test(url);
+    }
+
     onSubmit(event) {
         event.preventDefault();
         this.setState({response: null});
+        if (!this.validateUrl(this.state.originalUrl)) {
+            alert("Invalid Url!");
+            return;
+        }
         Axios.post('https://xinyan-zhang-webdev-a3-backend.herokuapp.com/api/url',
             {
                 originalUrl: this.state.originalUrl,
@@ -62,6 +76,7 @@ export default class CreateForm extends React.Component {
                 <input type="checkbox" id="branded" name="branded" onChange={(e) => this.onChange('branded', e)}/>
                 <label htmlFor="branded" style={{padding: "10px"}}>Branded</label>
                 <br/>
+                <p style={{color: 'red'}}>Urls must start with http or https</p>
                 <Form.Group as={Row}>
                     <Col sm="2"><Form.Label>Original Url: </Form.Label></Col>
                     <Col sm="10"><Form.Control type="text" id="original" onChange={(e) => this.onChange('originalUrl', e)}></Form.Control></Col>
