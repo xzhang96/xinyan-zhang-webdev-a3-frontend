@@ -92,8 +92,9 @@ class Edit extends React.Component {
                 <br/>
                 <span>Don't want your url anymore?  </span><Button variant="outline-danger" onClick={(e) => this.onDelete(e)}>Delete Url</Button>
                 <br/>
+                <br/>
                 <Alert variant="info" style={this.state.response !== null ? {display: "block"} : {display: "none"}}>
-                    <h3>{this.state.response}</h3>
+                    <h4>{this.state.response}</h4>
                 </Alert>
             </Container>
             
